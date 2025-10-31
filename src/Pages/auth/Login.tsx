@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import GoogleAuthButton from "../../Components/Button/GoogleBtn";
+import { signupWithGoogle } from "../../services/authServices";
 
 
 
@@ -28,6 +30,7 @@ const LoginPage = () => {
             <input placeholder="username" className="bg-gray-200 p-2 rounded-sm focus:outline-none outline-none" type="text" />
             <input placeholder="password" className="bg-gray-200 p-2 rounded-sm focus:outline-none outline-none" type="password" />
             <button className="bg-green-800 font-bold cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-green-700">Login</button>
+            <GoogleAuthButton handler={signupWithGoogle} title="Sign in with Google" />
             <p className="text-amber-800 cursor-pointer" onClick={()=> navigate('/signup')}>Don't have an account ?</p>
         </div>
     </div>

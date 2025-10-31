@@ -1,11 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import Button from "../Button/Button";
 
 
 
 
 const Navbar = () => {
 
-    const navigate = useNavigate();
+    const {user, loading} = useAuth();
 
     return (
         <nav className="lg:px-20 px-10 py-8 shadow-green-300 shadow-md">
@@ -23,9 +24,11 @@ const Navbar = () => {
                 </ul>
 
                 {/* Get strt Btn */}
-                <div className="w-auto">
-                        <button onClick={()=> navigate('/login')} className="bg-green-800 font-bold cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-green-700">Get Started</button>
-                </div>
+                {
+                    !user && !loading ?
+                    <Button href={'/login'} title="Get started" />
+                    : <Button href="/logout" title="logout" />
+                }
 
             </div>
         </nav>
