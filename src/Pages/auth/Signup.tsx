@@ -62,7 +62,7 @@ const SignupPage = () => {
             <input onChange={(e)=> setPassword(e.target.value)} value={password} placeholder="password" className="bg-gray-200 p-2 rounded-sm focus:outline-none outline-none" type="password" />
             <input onChange={(e)=> setConfirmPassword(e.target.value)} value={confirmPassword} placeholder="confirm password" className="bg-gray-200 p-2 rounded-sm focus:outline-none outline-none" type="password" />
             <button disabled={isSubmitting} onClick={handleSignup} className="bg-green-800 font-bold cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-green-700">{isSubmitting ? 'Loading..' : 'Sign >> up'}</button>
-            <GoogleAuthButton handler={signupWithGoogle} title="Signup With Google" />
+            <GoogleAuthButton disabled={isSubmitting} handler={signupWithGoogle} title="Signup With Google" />
             <p className="text-amber-800 cursor-pointer" onClick={()=> navigate('/login')}>Already have an account ?</p>
         </div>
     </div>

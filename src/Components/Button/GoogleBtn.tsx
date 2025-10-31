@@ -4,9 +4,10 @@ import googleIcon from '../../assets/google.png';
 interface GoogleAuthButtonProps {
   title: string;
   handler: () => void;
+  disabled: boolean;
 }
 
-const GoogleAuthButton = ({ title, handler }: GoogleAuthButtonProps) => {
+const GoogleAuthButton = ({ title, handler, disabled }: GoogleAuthButtonProps) => {
 
     const handleButtonClick = async () => {
         try{
@@ -23,6 +24,7 @@ const GoogleAuthButton = ({ title, handler }: GoogleAuthButtonProps) => {
   return (
     <div className="w-full">
       <button
+        disabled={disabled}
         onClick={handleButtonClick}
         className="bg-gray-50 flex justify-center items-center w-full text-gray-500 font-bold cursor-pointer px-4 py-2 rounded-lg hover:bg-gray-100"
       >
