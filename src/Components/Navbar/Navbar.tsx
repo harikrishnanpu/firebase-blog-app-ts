@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import Button from "../Button/Button";
 
@@ -7,13 +8,14 @@ import Button from "../Button/Button";
 const Navbar = () => {
 
     const {user, loading} = useAuth();
+    const navigate = useNavigate();
 
     return (
         <nav className="lg:px-20 px-10 py-8 shadow-green-300 shadow-md">
             <div className="flex justify-between items-center w-full">
                 
                 {/* Logo */}
-                <div className="logo w-1/2">
+                <div onClick={()=> navigate('/')} className="logo w-1/2 cursor-pointer">
                     <h1 className="font-bold text-[24px] text-green-900">{import.meta.env.VITE_APP_NAME}</h1>
                 </div>
 
@@ -23,7 +25,6 @@ const Navbar = () => {
                         <li className=" cursor-pointer">Contact</li>
                 </ul>
 
-                {/* Get strt Btn */}
                 {
                     !user && !loading ?
                     <Button href={'/login'} title="Get started" />
