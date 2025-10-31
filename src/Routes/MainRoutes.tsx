@@ -5,6 +5,7 @@ import CreateBlogPage from "../Pages/Blog/Create";
 import MyBlogPage from "../Pages/Blog/MyBlogs";
 import EditBlogPage from "../Pages/Blog/Edit";
 import BlogPage from "../Pages/Blog/BlogPage";
+import BlogGuard from "../route-guards/BlogGuard";
 
 
 
@@ -25,19 +26,19 @@ export const MainRoutes = {
             children: [
                 {
                     path: 'create',
-                    element: <CreateBlogPage />
+                    element: <BlogGuard component={<CreateBlogPage />} />
                 },
                 {
                     path: 'me',
-                    element: <MyBlogPage />
+                    element: <BlogGuard component={<MyBlogPage />} />
                 },
                 {
                     path: ':id',
-                    element: <BlogPage />
+                    element: <BlogGuard component={<BlogPage />} />
                 },
                 {
                     path: 'edit/:id',
-                    element: <EditBlogPage />
+                    element: <BlogGuard component={<EditBlogPage />} />
                 }
             ]
         }

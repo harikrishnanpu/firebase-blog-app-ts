@@ -8,21 +8,33 @@ import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
 
-    const [blogs, setBlogs] = useState<Array<Blog>>([])
+    const [blogs, setBlogs] = useState<Array<Blog>>([]);
+    const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
 
     useEffect(()=>{
-        const fetchBlogs = async () => {
-            try{
+      const fetchBlogs = async () => {
+        try{
+              setLoading(true);
                 const blogs = await getAllBlogs();
                 setBlogs(blogs as Array<Blog>);
             }catch(err){
                 console.log(err);
+            }finally{
+                setLoading(false);
             }
         }
 
         fetchBlogs();
-    })
+    },[]);
+
+    if(loading){
+      return (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600"></div>
+        </div>
+      )
+    }
 
     return (
 
@@ -64,10 +76,10 @@ const HomePage = () => {
           </button>
 
           <button 
-            onClick={() => navigate('/blog/me')}
+            onClick={() => navigate('/blog/create')}
             className="group relative cursor-pointer inline-flex items-center gap-2  from-green-600 bg-emerald-600 text-white px-8 py-3 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transition-all "
           >
-            <span>My Account</span>
+            <span>Create Article</span>
             <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
@@ -95,39 +107,11 @@ const HomePage = () => {
               />
             ))}
           </div>
-        </div>
 
-        <div className="absolute top-20 right-4 md:right-12 opacity-10 pointer-events-none">
-          <svg className="w-40 md:w-60 h-40 md:h-60 text-green-600" viewBox="0 0 200 200" fill="currentColor">
-            <path d="M100,20 Q120,40 130,70 Q140,100 130,130 Q120,160 100,180 Q80,160 70,130 Q60,100 70,70 Q80,40 100,20 Z" />
-            <path d="M100,20 Q90,50 85,80 Q80,110 85,140 Q90,170 100,180" stroke="currentColor" strokeWidth="2" fill="none" />
-          </svg>
         </div>
 
       </div>
 
-      <style>
-        {`
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .line-clamp-2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-      `}
-      </style>
     </section>
     )
 

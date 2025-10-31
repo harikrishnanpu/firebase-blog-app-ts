@@ -5,12 +5,13 @@ import { deleteBlog, getUserBlogs } from "../../services/blogServices";
 import MyBlogCard from "../../Components/BlogCard/MyBlogCard";
 import type { Timestamp } from "firebase/firestore";
 import type { Blog } from "../../types/Blog";
-
-
+import ConfirmDialog from "../../Components/ConfirmDialogue/ConfirmDialoague";
 
 const MyBlogPage = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedBlogId, setSelectedBlogId] = useState<string | null>(null);
+  const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const MyBlogPage = () => {
         const userBlogs = await getUserBlogs();
         setBlogs(userBlogs);
       } catch (err) {
-        if(err instanceof Error) toast.error(err.message);
+        if (err instanceof Error) toast.error(err.message);
       } finally {
         setLoading(false);
       }
@@ -27,28 +28,24 @@ const MyBlogPage = () => {
     fetchBlogs();
   }, []);
 
+  const handleDeleteClick = (id: string) => {
+    setSelectedBlogId(id);
+    setShowConfirm(true);
+  };
 
-  const handleBlogDelete = (id: string) => {
-
-    async function deleteBlogFunc(id: string){
+  const confirmDelete = async () => {
+    if (!selectedBlogId) return;
     try {
-      deleteBlog(id);
-      setBlogs(blogs.filter((blog) => blog.id !== id));
-      toast.success("Blog deleted successfully!");
+      await deleteBlog(selectedBlogId);
+      setBlogs(blogs.filter((b) => b.id !== selectedBlogId));
+      toast.success("Blog deleted successfully");
     } catch (err) {
       if (err instanceof Error) toast.error(err.message);
+    } finally {
+      setShowConfirm(false);
+      setSelectedBlogId(null);
     }
-    }
-
-    const confirm = window.confirm("Are you sure you want to delete this blog?")
-    if(!confirm){
-        toast.error("Blog deletion cancelled.");
-        return;
-    }
-
-    deleteBlogFunc(id);
-
-  }
+  };
 
   if (loading)
     return (
@@ -58,13 +55,11 @@ const MyBlogPage = () => {
     );
 
   return (
-    <section className="max-w-5xl mx-auto px-6 py-12">
-
-
+    <section className="max-w-5xl mx-auto px-6 py-12 relative">
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-3xl font-extrabold text-gray-800">My Blogs</h1>
-          <p className="text-gray-500 text-sm">published blogs</p>
+          <p className="text-gray-500 text-sm">Published blogs</p>
         </div>
 
         <button
@@ -75,15 +70,14 @@ const MyBlogPage = () => {
         </button>
       </div>
 
-
       {blogs.length === 0 ? (
         <div className="text-center text-gray-500 py-20">
-          <p className="text-lg">No blogs found.Start wrting</p>
+          <p className="text-lg">No blogs found. Start writing!</p>
           <button
             onClick={() => navigate("/blog/create")}
             className="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
           >
-            Start Writing 
+            Start Writing
           </button>
         </div>
       ) : (
@@ -93,14 +87,24 @@ const MyBlogPage = () => {
               key={blog.id}
               title={blog.title}
               content={blog.content}
-              createdAt={(blog.createdAt as Timestamp)}
+              createdAt={blog.createdAt as Timestamp}
               onEdit={() => navigate(`/blog/edit/${blog.id}`)}
-              viewBlog={()=> navigate(`/blog/${blog.id}`)}
-              onDelete={()=>handleBlogDelete(blog.id!)}
+              viewBlog={() => navigate(`/blog/${blog.id}`)}
+              onDelete={() => handleDeleteClick(blog.id!)}
             />
           ))}
         </div>
       )}
+
+      <ConfirmDialog
+        isOpen={showConfirm}
+        title="Delete Blog?"
+        message="Are you sure you want to delete this blog?"
+        confirmText="Delete"
+        cancelText="Cancel"
+        onConfirm={confirmDelete}
+        onCancel={() => setShowConfirm(false)}
+      />
     </section>
   );
 };

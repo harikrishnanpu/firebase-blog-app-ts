@@ -18,7 +18,7 @@ const EditBlogPage = () => {
   const [saving, setSaving] = useState(false);
   const navigate = useNavigate();
 
-  // Fetch existing blog
+
   useEffect(() => {
     const loadBlog = async () => {
       try {
