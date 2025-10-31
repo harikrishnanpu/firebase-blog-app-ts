@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signupUser } from "../../services/authServices";
+import { signupUser, signupWithGoogle } from "../../services/authServices";
 import { passwordValidator } from "../../utils/validator";
 import toast from "react-hot-toast";
+import GoogleAuthButton from "../../Components/Button/GoogleBtn";
 
 
 
@@ -61,6 +62,7 @@ const SignupPage = () => {
             <input onChange={(e)=> setPassword(e.target.value)} value={password} placeholder="password" className="bg-gray-200 p-2 rounded-sm focus:outline-none outline-none" type="password" />
             <input onChange={(e)=> setConfirmPassword(e.target.value)} value={confirmPassword} placeholder="confirm password" className="bg-gray-200 p-2 rounded-sm focus:outline-none outline-none" type="password" />
             <button disabled={isSubmitting} onClick={handleSignup} className="bg-green-800 font-bold cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-green-700">{isSubmitting ? 'Loading..' : 'Sign >> up'}</button>
+            <GoogleAuthButton disabled={isSubmitting} handler={signupWithGoogle} title="Signup With Google" />
             <p className="text-amber-800 cursor-pointer" onClick={()=> navigate('/login')}>Already have an account ?</p>
         </div>
     </div>
