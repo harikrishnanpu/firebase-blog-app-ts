@@ -66,7 +66,7 @@ export const getUserBlogs = async () => {
     const blogs = snapshot.docs.map((docSnap) => ({
       id: docSnap.id,
       ...docSnap.data(),
-    }));
+    }) as Blog);
 
     return blogs;
   } catch (err) {

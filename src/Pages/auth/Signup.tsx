@@ -27,7 +27,7 @@ const SignupPage = () => {
             }
             const user = await signupUser({email,password});
             console.log(user);
-            toast.success("Signup successful! 🎉");
+            toast.success("Signup successful!");
             navigate('/');
         }catch(err){
             if(err instanceof Error){

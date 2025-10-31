@@ -45,7 +45,7 @@ const BlogPage = () => {
   if (!blog)
     return (
       <div className="text-center text-gray-500 mt-20">
-        <p>Blog not found 😢</p>
+        <p>Blog not found</p>
         <button
           onClick={() => navigate(-1)}
           className="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
@@ -78,17 +78,7 @@ const BlogPage = () => {
         </p>
       </div>
 
-      {/* Blog Content */}
       <div className="max-w-4xl mx-auto px-6 py-10 sm:py-16">
-        {blog.coverImage && (
-          <div className="mb-10">
-            <img
-              src={blog.coverImage}
-              alt={blog.title}
-              className="rounded-lg shadow-md w-full object-cover max-h-[450px]"
-            />
-          </div>
-        )}
 
         <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
           {blog.content.split("\n").map((para, i) => (
@@ -99,9 +89,8 @@ const BlogPage = () => {
         </div>
       </div>
 
-      {/* Footer */}
       <footer className="border-t border-gray-200 mt-10 py-6 text-center text-gray-500 text-sm">
-        <p>🌿 A moment of reflection — written with care and curiosity.</p>
+        <p>copyright 2025 Green Mind</p>
       </footer>
     </article>
   );

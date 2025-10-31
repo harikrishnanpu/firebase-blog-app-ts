@@ -45,7 +45,6 @@ const BlogCreatePage = () => {
             onChange={(e) => setTitle(e.target.value)}
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
             placeholder="Enter blog title"
-            required
           />
         </div>
 
@@ -57,7 +56,6 @@ const BlogCreatePage = () => {
             rows={10}
             className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
             placeholder="Write your blog content..."
-            required
           />
         </div>
 
