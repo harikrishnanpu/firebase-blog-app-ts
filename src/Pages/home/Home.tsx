@@ -3,6 +3,7 @@ import BlogCard from "../../Components/BlogCard/BlogCard";
 import { getAllBlogs } from "../../services/blogServices";
 import type { Blog } from "../../types/Blog";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 
 
@@ -11,6 +12,7 @@ const HomePage = () => {
     const [blogs, setBlogs] = useState<Array<Blog>>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
+    const {user} = useAuth();
 
     useEffect(()=>{
       const fetchBlogs = async () => {
@@ -27,6 +29,11 @@ const HomePage = () => {
 
         fetchBlogs();
     },[]);
+
+    if(!user){
+      navigate('/login');
+      return;
+    }
 
     if(loading){
       return (

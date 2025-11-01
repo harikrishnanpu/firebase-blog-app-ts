@@ -24,6 +24,8 @@ const LoginPage = () => {
 
     const handleSingIn = async () => {
         try{
+            emailInputRef.current!.style.border = 'none';
+            passwordInputRef.current!.style.border = 'none';
             setIsSubmitting(true);
 
             if(email.trim() == '' || password.trim() == ''){
