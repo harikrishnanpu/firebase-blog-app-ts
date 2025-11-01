@@ -6,7 +6,6 @@ import type { Blog } from "../types/Blog";
 export const createBlog = async (
   title: string,
   content: string,
-  coverImage?: string
 ) => {
   const user = auth.currentUser;
 
@@ -18,9 +17,8 @@ export const createBlog = async (
     const docRef = await addDoc(collection(db, "blogs"), {
       title,
       content,
-      coverImage: coverImage || null,
       authorId: user.uid,
-      authorName: user.displayName || "Anonymous",
+      authorName: user.displayName || "anonymous",
       authorEmail: user.email,
       createdAt: serverTimestamp(),
     });
@@ -95,12 +93,14 @@ export const updateBlog = async (blogId: string, title: string, content: string)
   if (!user) throw new Error("You must be logged in.");
 
   try {
+    
     const blogRef = doc(db, "blogs", blogId);
     await updateDoc(blogRef, {
       title,
       content,
       updatedAt: new Date(),
     });
+
   } catch (err) {
     if (err instanceof Error) throw new Error(err.message);
     throw new Error("Failed to update blog.");

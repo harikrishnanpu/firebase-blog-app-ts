@@ -1,12 +1,14 @@
-import MainLayout from "../Layout/Main";
-import HomePage from "../Pages/home/Home";
-import AuthRedirect from "../route-guards/AuthGuard";
-import CreateBlogPage from "../Pages/Blog/Create";
-import MyBlogPage from "../Pages/Blog/MyBlogs";
-import EditBlogPage from "../Pages/Blog/Edit";
-import BlogPage from "../Pages/Blog/BlogPage";
-import BlogGuard from "../route-guards/BlogGuard";
+import { lazy } from "react";
 
+
+const MainLayout = lazy(() => import("../Layout/Main/index"));
+const HomePage = lazy(() => import("../Pages/home/Home"));
+const AuthRedirect = lazy(() => import("../route-guards/AuthGuard"));
+const CreateBlogPage = lazy(() => import("../Pages/Blog/Create"));
+const MyBlogPage = lazy(() => import("../Pages/Blog/MyBlogs"));
+const EditBlogPage = lazy(() => import("../Pages/Blog/Edit"));
+const BlogPage = lazy(() => import("../Pages/Blog/BlogPage"));
+const BlogGuard = lazy(() => import("../route-guards/BlogGuard"));
 
 
 export const MainRoutes = {

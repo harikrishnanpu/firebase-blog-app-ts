@@ -19,7 +19,9 @@ export const singInUser = async ({email, password} : User) => {
   try{
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential.user;
+
   }catch(err){
+
     if(err instanceof Error){
       throw new Error(err.message)
     }
@@ -28,6 +30,7 @@ export const singInUser = async ({email, password} : User) => {
 
 
 export const signupWithGoogle = async () => {
+  
   try {
 
     const provider = new GoogleAuthProvider();
