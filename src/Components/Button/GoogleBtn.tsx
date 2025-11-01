@@ -13,7 +13,7 @@ const GoogleAuthButton = ({ title, handler, disabled }: GoogleAuthButtonProps) =
         try{
             const user = await handler();
             console.log(user);
-            toast.success("Login successful! 🎉");
+            toast.success("Login successful!");
         }catch(err){
             if(err instanceof Error){
                 toast.error(err.message || "Login failed ! Please try again.");

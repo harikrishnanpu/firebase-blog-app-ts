@@ -1,5 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom"
 
+import treeLeaf from '../../assets/tree-leaf.png';
 
 
 
@@ -9,7 +10,7 @@ const Authlayout = () => {
 
     return (
         <div>
-                <nav className="lg:px-20 px-10 py-8">
+                <nav className="relative lg:px-20 px-10 py-8">
         <div className="flex justify-between items-center w-full">
                 
                 {/* Logo */}
@@ -18,6 +19,8 @@ const Authlayout = () => {
                 </div>
 
             </div>
+                        <img className="absolute bottom-[-80px] w-100 right-0 z-0" src={treeLeaf} alt="" />
+
     </nav>
             <Outlet />
         </div>

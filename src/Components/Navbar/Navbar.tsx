@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import Button from "../Button/Button";
+import treeLeaf from '../../assets/tree-leaf.png';
 
 
 
@@ -11,11 +12,11 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     return (
-        <nav className="lg:px-20 px-10 py-8 shadow-green-300 shadow-md">
+        <nav className="relative lg:px-20 px-10 py-8 shadow-green-300 shadow-md">
             <div className="flex justify-between items-center w-full">
                 
                 {/* Logo */}
-                <div onClick={()=> navigate('/')} className="logo w-1/2 cursor-pointer">
+                <div onClick={()=> navigate('/')} className="logo z-10 w-1/2 cursor-pointer">
                     <h1 className="font-bold text-[24px] text-green-900">{import.meta.env.VITE_APP_NAME}</h1>
                 </div>
 
@@ -32,6 +33,8 @@ const Navbar = () => {
                 }
 
             </div>
+            <img className="absolute bottom-0 w-50 left-0 rotate-180 z-0" src={treeLeaf} alt="" />
+            <img className="absolute bottom-0 w-70 right-0 z-0" src={treeLeaf} alt="" />
         </nav>
     )
 }
