@@ -1,8 +1,7 @@
 import { lazy, type FC } from "react"
-import LoginGuard from "../route-guards/LoginGuard";
 
 
-
+const LoginGuard = lazy(() => import("../route-guards/LoginGuard"));
 const LoginComponent: FC = lazy(()=> import('../Pages/auth/Login'));
 const SignupComponent: FC = lazy(()=> import('../Pages/auth/Signup'));
 const LogoutComponent: FC = lazy(()=> import('../Pages/auth/Logout'));

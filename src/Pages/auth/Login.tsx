@@ -39,17 +39,6 @@ const LoginPage = () => {
     return (
     <section>
 
-    <nav className="lg:px-20 px-10 py-8">
-        <div className="flex justify-between items-center w-full">
-                
-                {/* Logo */}
-                <div className="logo w-1/2">
-                    <h1 onClick={()=> navigate('/')} className="font-bold cursor-pointer text-[24px] text-green-900">{import.meta.env.VITE_APP_NAME}</h1>
-                </div>
-
-            </div>
-    </nav>
-
     <div className="flex flex-col justify-center items-center h-[80vh]">
         <h1 className="font-bold text-3xl text-green-700">Log {'>>'} in</h1>
         <p className="mt-4 text-gray-500">Grow your thoughts. Refresh your world.</p>
