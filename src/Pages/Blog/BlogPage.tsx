@@ -4,15 +4,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { getBlogById } from "../../services/blogServices";
+import type { Blog } from "../../types/Blog";
 
-interface Blog {
-  id: string;
-  title: string;
-  content: string;
-  authorName?: string;
-  createdAt?: { seconds: number; nanoseconds: number };
-  coverImage?: string | null;
-}
 
 const BlogPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -62,7 +55,7 @@ const BlogPage = () => {
   return (
     <article className="min-h-screen bg-gradient-to-br from-green-50 to-white text-gray-800">
 
-      <div className="relative w-full h-64 sm:h-80 bg-green-700 text-white flex flex-col justify-center items-center text-center px-4">
+      <div className="relative w-full h-64 sm:h-80 bg-gray-800 text-white flex flex-col justify-center items-center text-center px-4">
         <button
           onClick={() => navigate(-1)}
           className="absolute top-5 left-5 bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-full text-sm backdrop-blur-sm"

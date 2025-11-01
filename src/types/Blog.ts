@@ -6,4 +6,5 @@ export interface Blog {
   content: string;
   href?: string;
   createdAt?: { seconds: number; nanoseconds: number };
+  authorName?: string 
 }
